@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TourMateModule1</string>
+    <string name="ErrorLog">Please enter Email</string>
+    <string name="ErrorLog2">Please enter Password</string>
 </resources>
