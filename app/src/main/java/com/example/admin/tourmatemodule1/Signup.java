@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Signup extends AppCompatActivity {
 
@@ -21,6 +23,9 @@ public class Signup extends AppCompatActivity {
     Button btnRegister;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
+    DatabaseReference databaseReference;
+    FirebaseDatabase firebaseDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,9 @@ public class Signup extends AppCompatActivity {
         etpassword2=(EditText)findViewById(R.id.etPassword2);
         btnRegister=(Button)findViewById(R.id.btnSignUp);
 
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference("UserData");
+
         firebaseAuth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -43,11 +51,11 @@ public class Signup extends AppCompatActivity {
             btnRegister.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String emails = etEmailAdd.getText().toString();
+                    final String emails = etEmailAdd.getText().toString();
                     String passwords = etPassword.getText().toString();
                     String password2 = etpassword2.getText().toString();
-                    String name = etName.getText().toString();
-                    String phone = etPhone.getText().toString();
+                    final String name = etName.getText().toString();
+                    final String phone = etPhone.getText().toString();
 
                     if (name.isEmpty()) {
                         etName.setError(getText(R.string.error_common));
@@ -67,6 +75,9 @@ public class Signup extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    String key= databaseReference.push().getKey();
+                                    UserData userData= new UserData(name,emails,phone);
+                                    databaseReference.child(key).setValue(userData);
                                     Toast.makeText(Signup.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(Signup.this, Login.class);
                                     startActivity(intent);
