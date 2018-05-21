@@ -2,4 +2,8 @@
     <string name="app_name">TourMateModule1</string>
     <string name="ErrorLog">Please enter Email</string>
     <string name="ErrorLog2">Please enter Password</string>
+    <string name="error_common">This field can not be empty</string>
+    <string name="error_common2">This field can not be empty with at least 6 character </string>
+    <string name="password_mismatch">Password mismatch</string>
+
 </resources>

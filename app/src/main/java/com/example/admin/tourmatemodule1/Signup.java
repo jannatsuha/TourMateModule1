@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Signup extends AppCompatActivity {
 
-    EditText etName,etEmailAdd,etPhone,etPassword;
+    EditText etName,etEmailAdd,etPhone,etPassword,etpassword2;
     Button btnRegister;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
@@ -30,39 +30,65 @@ public class Signup extends AppCompatActivity {
         etEmailAdd=(EditText)findViewById(R.id.etEmail);
         etPhone=(EditText)findViewById(R.id.etPhone);
         etPassword=(EditText)findViewById(R.id.etPassword);
+        etpassword2=(EditText)findViewById(R.id.etPassword2);
         btnRegister=(Button)findViewById(R.id.btnSignUp);
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user != null) {
-            Intent intent = new Intent(Signup.this, CreateEvent.class);
-            startActivity(intent);
-        } else {
+//        if (user != null) {
+//            Intent intent = new Intent(Signup.this, CreateEvent.class);
+//            startActivity(intent);
+//        } else {
             btnRegister.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                     String emails = etEmailAdd.getText().toString();
-                     String passwords = etPassword.getText().toString();
+                    String emails = etEmailAdd.getText().toString();
+                    String passwords = etPassword.getText().toString();
+                    String password2 = etpassword2.getText().toString();
+                    String name = etName.getText().toString();
+                    String phone = etPhone.getText().toString();
 
-                    firebaseAuth.createUserWithEmailAndPassword(emails, passwords).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful())
-                            {
-                                Toast.makeText(Signup.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                                {
+                    if (name.isEmpty()) {
+                        etName.setError(getText(R.string.error_common));
+                    } else if (emails.isEmpty()) {
+                        etEmailAdd.setError(getText(R.string.error_common));
+                    } else if (phone.isEmpty()) {
+                        etPhone.setError(getText(R.string.error_common));
+                    } else if (passwords.isEmpty() || passwords.length() < 6)
+                    {
+                        etPassword.setError(getText(R.string.error_common2));
+                    } else if (password2.isEmpty()) {
+                        etpassword2.setError(getText(R.string.error_common));
+
+
+                    } else if (password2.equals(passwords)) {
+                        firebaseAuth.createUserWithEmailAndPassword(emails, passwords).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(Signup.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(Signup.this, Login.class);
+                                    startActivity(intent);
+                                } else {
                                     Toast.makeText(Signup.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                                 }
-                        }
-                    });
+                            }
+                        });
+                    } else {
+                        etpassword2.setError(getText(R.string.password_mismatch));
+                    }
                 }
             });
 
-        }
 
+
+    }
+
+    @Override
+    protected void onStop() {
+        firebaseAuth.removeAuthStateListener((FirebaseAuth.AuthStateListener) firebaseAuth);
+        super.onStop();
     }
 
     @Override
