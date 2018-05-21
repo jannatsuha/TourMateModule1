@@ -29,7 +29,7 @@ public class Signup extends AppCompatActivity {
         etName=(EditText)findViewById(R.id.etNmae);
         etEmailAdd=(EditText)findViewById(R.id.etEmail);
         etPhone=(EditText)findViewById(R.id.etPhone);
-        etPassword=(EditText)findViewById(R.id.etPass);
+        etPassword=(EditText)findViewById(R.id.etPassword);
         btnRegister=(Button)findViewById(R.id.btnSignUp);
 
         firebaseAuth = FirebaseAuth.getInstance();
