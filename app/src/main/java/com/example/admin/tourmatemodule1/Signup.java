@@ -81,13 +81,10 @@ public class Signup extends AppCompatActivity {
                 }
             });
 
-
-
     }
 
     @Override
     protected void onStop() {
-        firebaseAuth.removeAuthStateListener((FirebaseAuth.AuthStateListener) firebaseAuth);
         super.onStop();
     }
 

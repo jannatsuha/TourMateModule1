@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#3dc1d2"
+    tools:context=".AddNewEvent">
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:id="@+id/etEventName"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColorHint="#fb5c5252"
+        android:layout_marginHorizontal="15dp"
+        android:hint="Enter an Event Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_marginTop="10dp"
+        android:id="@+id/etStartLoc"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColorHint="#fb5c5252"
+        android:layout_marginHorizontal="15dp"
+        android:hint="Your Starting Location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_marginTop="10dp"
+        android:id="@+id/etDestination"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColorHint="#fb5c5252"
+        android:layout_marginHorizontal="15dp"
+        android:hint="Your Destination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_marginTop="10dp"
+        android:id="@+id/etDepartureDate"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColorHint="#fb5c5252"
+        android:layout_marginHorizontal="15dp"
+        android:hint="Enter Departure date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_marginTop="10dp"
+        android:id="@+id/etBudget"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColorHint="#fb5c5252"
+        android:layout_marginHorizontal="15dp"
+        android:hint="Your Estimated Budget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_marginTop="15dp"
+        android:id="@+id/btnCreateEvent"
+        android:text="Create Event"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
